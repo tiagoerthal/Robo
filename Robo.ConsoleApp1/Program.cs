@@ -1,15 +1,14 @@
-﻿namespace Robo.ConsoleApp1
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Robo.ConsoleApp1
 {
     internal class Program
     {
+        public static string instrucao = "mmmmmMmmmemmmmmmmmm".ToUpper();
         static void Main(string[] args)
         {
-            int posicaoX = 0;
-            int posicaoY = 0;
-
-            string localizacaoRobo = $"{posicaoX},{posicaoY}";
-            char direcaoRobo = 'L'; //Direção começa
-            string instrucao = "eee".ToUpper();
+            bool movimentoValido = true;                   
+            
 
             while (true)
             {
@@ -18,46 +17,32 @@
                     char comando = instrucao[i];
 
                     if (comando == 'D')
-                    {
-                        direcaoRobo = VirarDireita(direcaoRobo);
-                    }
+                        Movimento.VirarDireita();
                     else if (comando == 'E')
+                        Movimento.VirarEsquerda();
+                    else if (comando == 'M')
                     {
-                        direcaoRobo = VirarEsquerda(direcaoRobo);
+                        int qtdMovimentos = 0;
+
+                        while (i < instrucao.Length && instrucao[i] == 'M')
+                        {
+                            qtdMovimentos++;
+                            i++;
+                        }
+                        i--;
+
+                        var resultadoMovimento = Movimento.MoverRobo(qtdMovimentos);
+                        if (resultadoMovimento == null)
+                        {
+                            movimentoValido = false;
+                            break;
+                        }
                     }
-                    else
-                    {
-                        Console.WriteLine($"Comando inválido: Utilize [D], para direita, [M], para mover, ou [E] para esquerda!");
-                        //Console.ReadLine();
-                        break;
-                    }
+                    else Console.WriteLine($"Comando inválido: Use [D], para direita, [M], para mover, ou [E] para esquerda.");
                 }
-                Console.WriteLine($"\nLocalização do robô:{localizacaoRobo},{direcaoRobo}");
-                Console.WriteLine("-----------------------------------------------------");
-                Console.Write("Faça um movimento: ");
+                Movimento.ExibirLocalizacao(movimentoValido);
                 Console.ReadLine();
-
-                Console.Clear();
-            }
-
-            static char VirarDireita(char direcaoAtual)
-            {
-                if (direcaoAtual == 'N') return 'L';
-                else if (direcaoAtual == 'L') return 'S';
-                else if (direcaoAtual == 'S') return 'O';
-                else if (direcaoAtual == 'O') return 'N';
-                return direcaoAtual;
-            }
-            static char VirarEsquerda(char direcaoAtual)
-            {
-                if (direcaoAtual == 'N') return 'O';
-                else if (direcaoAtual == 'O') return 'S';
-                else if (direcaoAtual == 'S') return 'L';
-                else if (direcaoAtual == 'L') return 'N';
-                return direcaoAtual;
-            }
-           
-
+            }          
         }
     }
 }
