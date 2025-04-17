@@ -3,41 +3,23 @@
 namespace Robo.ConsoleApp1
 {
     internal class Program
-    {
-        public static string instrucao = "MMDDEEMM".ToUpper();
+    {    
         static void Main(string[] args)
         {
-            bool movimentoValido = true;
-
-            for (int i = 0; i < instrucao.Length; i++)
             {
-                char comando = instrucao[i];
+                Robo robo1 = new Robo();
+                Robo robo2 = new Robo();
 
-                if (comando == 'D') Movimento.VirarDireita();
-                else if (comando == 'E') Movimento.VirarEsquerda();
-                else if (comando == 'M')
-                {
-                    int qtdMovimentos = 0;
+                string instrucao1 = "MDDMMMeMME";
+                string instrucao2 = "MMEEMMDDM";
 
-                    while (i < instrucao.Length && instrucao[i] == 'M')
-                    {
-                        qtdMovimentos++;
-                        i++;
-                    }
-                    i--;
+                Console.WriteLine("Movimentos do Robô 1:");
+                robo1.ExecutarInstrucoes(instrucao1.ToUpper());
 
-                    var resultadoMovimento = Movimento.MoverRobo(qtdMovimentos);
-                    if (resultadoMovimento == null)
-                    {
-                        movimentoValido = false;
-                        break;
-                    }
-                }
-                else Console.WriteLine($"Comando inválido: Use [D], para direita, [M], para mover, ou [E] para esquerda");
+                Console.WriteLine("\nMovimentos do Robô 2:");
+                robo2.ExecutarInstrucoes(instrucao2.ToUpper());
+                Console.ReadLine();
             }
-            Movimento.ExibirLocalizacao(movimentoValido);
-            Console.ReadLine();
-
         }
     }
 }
