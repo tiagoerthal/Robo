@@ -1,5 +1,7 @@
 # Robô tupiniquim
 
+![](https://imgur.com/QVjdfKN.gif)
+
 Os robôs estão em uma área escolhida para análise e curiosamente retangular e os robôs devem
 andar por ela com suas câmeras ligadas coletando todo tipo de informação.
 A posição de um robô é representada por uma combinação de coordenadas X
