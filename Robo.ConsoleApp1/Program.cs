@@ -10,7 +10,7 @@ namespace Robo.ConsoleApp1
                 Robo robo1 = new Robo();
                 Robo robo2 = new Robo();
 
-                string instrucao1 = "MDDMMMeMME";
+                string instrucao1 = "MMDEEMDDM";
                 string instrucao2 = "MMEEMMDDM";
 
                 Console.WriteLine("Movimentos do Robô 1:");
